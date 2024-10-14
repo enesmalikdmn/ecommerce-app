@@ -7,6 +7,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { ChakraProvider } from '@chakra-ui/react'
+import SignIn from './pages/Auth/SignIn';
+import SignUp from './pages/Auth/SignUp';
+
 import App from './App';
 
 
@@ -23,6 +27,14 @@ const router = createBrowserRouter([
         path: "/products",
         element: <div>products</div>
       },
+      {
+        path: "/signin",
+        element: <SignIn />
+      },
+      {
+        path: "/signup",
+        element: <SignUp /> 
+      }
     ],
   },
 ]);
@@ -30,7 +42,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />  
+    </ChakraProvider>
   </React.StrictMode>
 );
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Outlet, Link } from "react-router-dom";
 import styles from './styles.module.css'
+import { Button, Stack } from '@chakra-ui/react'
+
 function Navbar() {
   return (
   <nav className={styles.nav}>
@@ -14,7 +16,14 @@ function Navbar() {
         </li>
       </ul>
     </div>
-    <div className='right'> right </div>
+    <Stack spacing={4} direction='row' align='center'>
+      <Link to={`/signup`}>
+        <Button colorScheme='blue'>Register</Button>
+      </Link> 
+      <Link to={`/signin`}>
+        <Button colorScheme='blue'>Login</Button>
+      </Link>
+    </Stack>
   </nav>
   )
 }

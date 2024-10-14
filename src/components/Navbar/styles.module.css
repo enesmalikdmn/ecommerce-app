@@ -23,3 +23,7 @@
     color: #333;
     font-size: 1.2rem;
 }
+
+.nav .left .menu a:hover {
+    color: #3182ce;
+}
