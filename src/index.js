@@ -10,6 +10,7 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
+import Products from './pages/Products';
 
 import App from './App';
 
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <div>products</div>
+        element: <Products />,
       },
       {
         path: "/signin",

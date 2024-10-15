@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from './styles.module.css'
 import { Button, Stack } from '@chakra-ui/react'
 
