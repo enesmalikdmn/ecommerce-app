@@ -11,12 +11,21 @@ import { ChakraProvider } from '@chakra-ui/react'
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import Products from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import App from './App';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  },
+})
 
 const router = createBrowserRouter([
   {
@@ -30,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetail />, 
       },
       {
         path: "/signin",
@@ -50,6 +63,7 @@ root.render(
       <ChakraProvider>
         <RouterProvider router={router} />  
       </ChakraProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
 );
