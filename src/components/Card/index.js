@@ -8,12 +8,12 @@ function Card({ item }) {
     <div>
         <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Link to={`/products/${item.id}`}>
-            <Image src={item.image} alt={item.title} loading='lazy' />
+            <Image src={item.images[0]} alt={item.title} loading='lazy' h={80} w="full"  />
     
             <Box p="6">
                 <Box d="flex" alignItems="baseline">
                     <Text fontSize="sm" color="gray.500">
-                        {moment('2024-10-10T14:48:00.000Z').format('MMMM Do YYYY')}
+                        {moment(item.creationAt).format('MMMM Do YYYY')}
                     </Text>
                 </Box>
 

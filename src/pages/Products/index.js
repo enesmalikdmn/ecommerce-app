@@ -5,8 +5,6 @@ import { useQuery } from 'react-query'
 import { getProducts } from '../../services/api'
 
 function Products() {
-  console.log('Products');
-  
   const { isLoading, error, data } = useQuery('products', () =>
     getProducts()
   )
@@ -14,12 +12,10 @@ function Products() {
   if (isLoading) return 'Loading...'
 
   if (error) return 'An error has occurred: ' + error.message
-
-  console.log(data);
   
   return (
     <div>
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {data.map((item) => (
             <Card key={item.id} item={item} />
           ))}
