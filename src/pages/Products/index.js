@@ -1,27 +1,69 @@
-import React from 'react'
-import Card from '../../components/Card'
-import { Grid } from '@chakra-ui/react'
-import { useQuery } from 'react-query'
-import { getProducts } from '../../services/api'
+import React, { useRef, useEffect } from 'react';
+import Card from '../../components/Card';
+import { Grid, Spinner, Box } from '@chakra-ui/react';
+import { useInfiniteQuery } from 'react-query';
+import { getProducts } from '../../services/api';
 
 function Products() {
-  const { isLoading, error, data } = useQuery('products', () =>
-    getProducts()
-  )
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery('products', getProducts, {
+    getNextPageParam: (lastPage, pages) => {
+      const hasMorePage = lastPage?.length === 12;
+      if (!hasMorePage) return undefined;
+      return pages.length + 1; // Sonraki sayfa numarasını belirle
+    },
+  });
 
-  if (isLoading) return 'Loading...'
+  // Son öğeye referans vermek için Intersection Observer kullanıyoruz
+  const observerRef = useRef();
 
-  if (error) return 'An error has occurred: ' + error.message
-  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage(); // Son öğe ekranda görünürse yeni sayfayı getir
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (observerRef.current) observer.observe(observerRef.current);
+
+    return () => observer.disconnect(); // Temizlik işlemi
+  }, [hasNextPage, fetchNextPage]);
+
+  if (status === 'loading') return <Spinner size="xl" />;
+
+  if (status === 'error') return <div>An error has occurred: {error.message}</div>;
+
   return (
     <div>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-          {data.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
-        </Grid>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        {data.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+          </React.Fragment>
+        ))}
+      </Grid>
+
+      {isFetchingNextPage && (
+        <Box textAlign="center" mt={4}>
+          <Spinner size="lg" />
+        </Box>
+      )}
+
+      {/* Intersection Observer'ın tetikleneceği yer */}
+      <div ref={observerRef} style={{ height: '1px' }} />
     </div>
-  )
+  );
 }
 
-export default Products
+export default Products;

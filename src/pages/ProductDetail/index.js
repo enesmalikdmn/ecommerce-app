@@ -7,14 +7,6 @@ import ReactImageGallery from 'react-image-gallery'
 
 
 function ProductDetail() {
-  const images = [
-    {
-        original: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-    },
-    {
-        original: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-    },
-  ]
   const { id } = useParams()
   
   const { isLoading, error, data } = useQuery(['productDetail', id], () =>
@@ -25,6 +17,9 @@ function ProductDetail() {
 
   if (error) return 'An error has occurred: ' + error.message
 
+  const images = data.images.map(image => ({
+    original: image,
+  }))
     
   return (
     <div>

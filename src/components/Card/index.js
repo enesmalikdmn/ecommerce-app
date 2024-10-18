@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 
 function Card({ item }) {
+    const cleanedUrl = item.images[0].replace(/^\[\"|\"\]$/g, '')
   return (
     <div>
         <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Link to={`/products/${item.id}`}>
-            <Image src={item.images[0]} alt={item.title} loading='lazy' h={80} w="full"  />
+            <Image src={cleanedUrl} alt={item.title} loading='lazy' h={80} w="full"  />
     
             <Box p="6">
                 <Box d="flex" alignItems="baseline">

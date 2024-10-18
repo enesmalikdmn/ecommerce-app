@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
+    <div className='h-screen'>
       <Navbar />
       <div id='content'>
         <Outlet />
