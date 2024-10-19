@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
+import { AuthProvider } from './contexts/AuthContext';
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import Products from './pages/Products';
@@ -61,7 +62,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-        <RouterProvider router={router} />  
+        <AuthProvider>
+          <RouterProvider router={router} />  
+        </AuthProvider>
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

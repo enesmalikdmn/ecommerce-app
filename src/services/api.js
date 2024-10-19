@@ -10,12 +10,12 @@ export const getProductDetail = async (id) => {
     return data
 }
 
-export const signUp = async (email, password) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, { email, password })
+export const signUp = async ({name, email, password, avatar = 'https://api.lorem.space/image/face?w=640&h=480'}) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/users`, { name, email, password, avatar })
     return data
 }
 
-export const signIn = async (email, password) => {
+export const signIn = async ({email, password}) => {
     const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password })
     return data
 }
