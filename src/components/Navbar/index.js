@@ -7,8 +7,6 @@ import { useAuth } from "../../contexts/AuthContext";
 function Navbar() {
   const { isLoginSucces } = useAuth();
 
-  console.log(isLoginSucces);
-
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>

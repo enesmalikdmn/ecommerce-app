@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { signUpValidationSchema } from "./validations";
-import { signUp } from "../../../services/api";
+import { signIn, signUp } from "../../../services/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
 function SignUp() {
@@ -28,11 +28,12 @@ function SignUp() {
     validationSchema: signUpValidationSchema,
     onSubmit: async (values, bag) => {
       try {
-        const response = await signUp({name: values.username, email: values.email, password: values.password});
+        await signUp({name: values.username, email: values.email, password: values.password});
+        const loginResponse = await signIn({email: values.email, password: values.password});
         bag.setSubmitting(false);
         bag.resetForm();
         
-        login(response);
+        login(loginResponse);
       } catch (error) {
         bag.setErrors({ general: error.response.data.message });
       }

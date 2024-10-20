@@ -2,10 +2,11 @@ import axios from 'axios'
 
 axios.interceptors.request.use(function (config) {
     const { origin } = new URL(config.url);
+    
     const allowedOrigins = [process.env.REACT_APP_API_URL];
     
-    if (allowedOrigins.includes(origin)) {
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+    if (allowedOrigins[0].includes(origin)) {
+        config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
     }
 
     return config;
@@ -30,5 +31,10 @@ export const signUp = async ({name, email, password, avatar = 'https://api.lorem
 
 export const signIn = async ({email, password}) => {
     const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password })
+    return data
+}
+
+export const getProfile = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/auth/profile`)
     return data
 }
