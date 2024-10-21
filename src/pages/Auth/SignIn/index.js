@@ -14,8 +14,10 @@ import {
 import { useFormik } from "formik";
 import { signInValidationSchema } from "./validations";
 import { signIn } from "../../../services/api";
+import { useAuth } from "../../../contexts/AuthContext";
 
 function SignIn() {
+  const { login } = useAuth();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,9 +26,11 @@ function SignIn() {
     validationSchema: signInValidationSchema,
     onSubmit: async (values, bag) => {
       try {
-        await signIn({ email: values.email, password: values.password });
+        const response = await signIn({ email: values.email, password: values.password });
         bag.setSubmitting(false);
         bag.resetForm();
+        login(response);
+        window.location.href = "/products";
       } catch (error) {
         bag.setErrors({ email: "Invalid email or password", password: "Invalid email or password" });
       }

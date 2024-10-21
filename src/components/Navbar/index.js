@@ -3,9 +3,17 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Button, Stack } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  const { isLoginSucces } = useAuth();
+  const { isLoginSucces, logout } = useAuth();
+  const navigate = useNavigate();  
+
+  const handleLogout = () => {
+    logout(() => {
+      navigate('/');
+    });
+  }
 
   return (
     <nav className={styles.nav}>
@@ -30,9 +38,12 @@ function Navbar() {
             </Link>
           </>
         ) : (
-          <Button colorScheme="red" variant="outline">
-            <Link to={`/auth/signout`}>Sign Out</Link>
-          </Button>
+          <>
+            <Button onClick={handleLogout} colorScheme="blue" variant="outline">Logout</Button>
+            <Link to={`/profile`}>
+              <Button colorScheme="blue">Profile</Button>
+            </Link>
+          </>
         )}
       </Stack>
     </nav>

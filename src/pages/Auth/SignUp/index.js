@@ -32,8 +32,8 @@ function SignUp() {
         const loginResponse = await signIn({email: values.email, password: values.password});
         bag.setSubmitting(false);
         bag.resetForm();
-        
         login(loginResponse);
+        window.location.href = "/products";
       } catch (error) {
         bag.setErrors({ general: error.response.data.message });
       }

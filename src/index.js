@@ -18,6 +18,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import App from './App';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
+import Profile from './pages/Profile';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp /> 
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       }
     ],
   },

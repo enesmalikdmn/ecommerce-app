@@ -37,9 +37,20 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('refresh_token', data.refresh_token);
     }
 
+    const logout = (callback) => {
+        setIsLoginSucces(false);
+        setUser(null);
+
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+
+        callback();
+    }
+
     const values = {
         user,
         login,
+        logout,
         loading,
         isLoginSucces
     }
