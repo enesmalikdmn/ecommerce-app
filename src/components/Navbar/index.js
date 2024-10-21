@@ -20,11 +20,7 @@ function Navbar() {
         </ul>
       </div>
       <Stack spacing={4} direction="row" align="center">
-        {isLoginSucces ? (
-          <Button colorScheme="red" variant="outline">
-            <Link to={`/auth/signout`}>Sign Out</Link>
-          </Button>
-        ) : (
+        {!isLoginSucces ? (
           <>
             <Link to={`/signup`}>
               <Button colorScheme="blue">Register</Button>
@@ -33,6 +29,10 @@ function Navbar() {
               <Button colorScheme="blue">Login</Button>
             </Link>
           </>
+        ) : (
+          <Button colorScheme="red" variant="outline">
+            <Link to={`/auth/signout`}>Sign Out</Link>
+          </Button>
         )}
       </Stack>
     </nav>

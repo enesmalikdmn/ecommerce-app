@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 import { getProfile } from '../services/api';
+import { Flex, Spinner } from '@chakra-ui/react';
 
 
 const AuthContext = createContext();
@@ -13,11 +14,12 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         (async () => {
             const access_token = localStorage.getItem('access_token');
-
+            
             if (access_token) {
                 try {
                     const response = await getProfile();
                     setUser(response);
+                    setIsLoginSucces(true);
                 } catch (error) {
                     console.log(error);
                 }
@@ -41,6 +43,12 @@ export const AuthProvider = ({ children }) => {
         loading,
         isLoginSucces
     }
+
+    if (loading) return (
+        <Flex justify="center" align="center" h="100vh">
+            <Spinner size="xl" />
+        </Flex>
+    )
 
     return (
         <AuthContext.Provider value={values}>
