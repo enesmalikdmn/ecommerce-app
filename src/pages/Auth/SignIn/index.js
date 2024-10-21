@@ -15,8 +15,10 @@ import { useFormik } from "formik";
 import { signInValidationSchema } from "./validations";
 import { signIn } from "../../../services/api";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const formik = useFormik({
     initialValues: {
@@ -30,7 +32,7 @@ function SignIn() {
         bag.setSubmitting(false);
         bag.resetForm();
         login(response);
-        window.location.href = "/products";
+        navigate('/products');
       } catch (error) {
         bag.setErrors({ email: "Invalid email or password", password: "Invalid email or password" });
       }

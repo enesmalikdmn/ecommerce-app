@@ -13,6 +13,8 @@ import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
+import ProtectedRoute from './pages/ProtectedRoute';
+
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import App from './App';
@@ -56,8 +58,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
-      }
+        element: <ProtectedRoute />,
+        children: [
+          { path: "", element: <Profile /> },
+        ],
+      },
     ],
   },
 ]);
