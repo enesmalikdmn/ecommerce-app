@@ -23,6 +23,7 @@ import App from './App';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Profile from './pages/Profile';
 import Basket from './pages/Basket';
+import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,7 +69,11 @@ const router = createBrowserRouter([
       {
         path: "/basket",
         element: <Basket />,
-      }
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
 ]);
