@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='h-screen'>
       <Navbar />
-      <div id='content'>
+      <div id='content' >
         <Outlet />
       </div>
     </div>

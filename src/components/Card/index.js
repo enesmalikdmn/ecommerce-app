@@ -6,7 +6,7 @@ import { useBasket } from "../../contexts/BasketContext";
 
 function Card({ item }) {
   const { addProduct } = useBasket();
-  const cleanedUrl = item.images[0].replace(/^\[\"|\"\]$/g, "");
+  const cleanedUrl = item.images[0].replace(/^\["|"\]$/g, "");
   return (
     <div>
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
