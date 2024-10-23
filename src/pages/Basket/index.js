@@ -25,7 +25,6 @@ function Basket() {
           newBasket.splice(index, 1);
           setBasket(newBasket);
       }
-      
   }
   
   return (
@@ -33,7 +32,7 @@ function Basket() {
         {uniqueBasket.length === 0 && <Alert status="warning">Basket is empty</Alert>}
         {uniqueBasket.map((item, index) => (
             <div className='flex gap-4' key={index}>
-                <Image h={40} src={item.images} alt={item.title} />
+                <Image loading="lazy" h={40} src={item.images} alt={item.title} />
                 <div className='flex flex-col gap-4 justify-center'>
                   <p>{item.title}</p>
                   <p>{item.price} $</p>
