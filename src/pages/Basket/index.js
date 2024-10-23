@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useBasket } from "../../contexts/BasketContext";
 import {
   Alert,
@@ -6,37 +6,28 @@ import {
   Image,
   Box,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
-  FormControl,
-  FormLabel,
-  Textarea,
 } from "@chakra-ui/react";
+import CustomModal from "../../shared/CustomModal"; // Modal bileşenini dahil edin
 
 function Basket() {
   const { basket, setBasket } = useBasket();
-
   const [address, setAddress] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = useRef();
 
   const totalAmount = basket.reduce((acc, item) => acc + item.price, 0);
+  
   const uniqueBasket = useMemo(() => {
     return basket.reduce((acc, item) => {
       const foundItem = acc.find((i) => i.id === item.id);
       if (foundItem) {
-        foundItem.count += 1; // increase count if item already exists
+        foundItem.count += 1;
       } else {
-        acc.push({ ...item, count: 1 }); // add item with initial count 1
+        acc.push({ ...item, count: 1 });
       }
       return acc;
     }, []);
-  }, [basket]); // uniqueBasket will only recalculate when basket changes
+  }, [basket]);
 
   const removeItem = (item) => () => {
     const index = basket.findIndex((i) => i.id === item.id);
@@ -52,7 +43,6 @@ function Basket() {
       address,
       items: basket,
     };
-
     localStorage.setItem("order", JSON.stringify(order));
     setBasket([]);
     onClose();
@@ -84,32 +74,13 @@ function Basket() {
         Order
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalBody>
-            <FormControl>
-              <FormLabel>Save Order</FormLabel>
-              <Textarea
-                ref={initialRef}
-                placeholder="Address"
-                resize={false}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-          <ModalFooter className="flex gap-4">
-            <Button colorScheme="red" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="green" onClick={handleOrder}>
-              Save
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <CustomModal
+        isOpen={isOpen}
+        onClose={onClose}
+        address={address}
+        setAddress={setAddress}
+        handleOrder={handleOrder}
+      />
     </div>
   );
 }
