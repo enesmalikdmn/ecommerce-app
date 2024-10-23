@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, Stack, Icon } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useBasket } from "../../contexts/BasketContext";
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const { isLoginSucces, logout } = useAuth();
+  const { basket } = useBasket();
   const navigate = useNavigate();  
 
   const handleLogout = () => {
@@ -39,10 +41,15 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Button onClick={handleLogout} colorScheme="blue" variant="outline">Logout</Button>
+            <Link to={`/basket`}>
+              <Button colorScheme="blue">
+                Basket ({basket.length})
+              </Button>
+            </Link>
             <Link to={`/profile`}>
               <Button colorScheme="blue">Profile</Button>
             </Link>
+            <Button onClick={handleLogout} colorScheme="blue" variant="outline">Logout</Button>
           </>
         )}
       </Stack>

@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
 import { AuthProvider } from './contexts/AuthContext';
+import { BasketProvider } from './contexts/BasketContext';
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import Products from './pages/Products';
@@ -21,6 +22,7 @@ import App from './App';
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Profile from './pages/Profile';
+import Basket from './pages/Basket';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
           { path: "", element: <Profile /> },
         ],
       },
+      {
+        path: "/basket",
+        element: <Basket />,
+      }
     ],
   },
 ]);
@@ -73,7 +79,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
         <AuthProvider>
-          <RouterProvider router={router} />  
+          <BasketProvider>
+            <RouterProvider router={router} />  
+          </BasketProvider>
         </AuthProvider>
       </ChakraProvider>
       <ReactQueryDevtools initialIsOpen={false} />

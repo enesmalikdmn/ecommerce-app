@@ -4,10 +4,12 @@ import { useQuery } from 'react-query'
 import { getProductDetail } from '../../services/api'
 import { Box, Image, Text, Button } from '@chakra-ui/react'
 import ReactImageGallery from 'react-image-gallery'
+import { useBasket } from '../../contexts/BasketContext'
 
 
 function ProductDetail() {
   const { id } = useParams()
+  const { addProduct } = useBasket()
   
   const { isLoading, error, data } = useQuery(['productDetail', id], () =>
     getProductDetail(id)
@@ -18,7 +20,7 @@ function ProductDetail() {
   if (error) return 'An error has occurred: ' + error.message
 
   const images = data.images.map(image => ({
-    original: image,
+    original: image.replace(/^\[\"|\"\]$/g, ""),
   }))
     
   return (
@@ -51,7 +53,7 @@ function ProductDetail() {
                 </Box>
 
                 <Box>
-                    <Button colorScheme="blue">Add to basket</Button>
+                    <Button onClick={() => addProduct(data)} colorScheme="blue">Add to basket</Button>
                 </Box>
             </Box>
         </Box>
