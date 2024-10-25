@@ -15,6 +15,7 @@ import SignUp from './pages/Auth/SignUp';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import ProtectedRoute from './pages/ProtectedRoute';
+import AdminPanel from './pages/AdminPanel';
 
 import { ReactQueryDevtools } from 'react-query/devtools'
 
@@ -64,6 +65,13 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: "", element: <Profile /> },
+        ],
+      },
+      {
+        path: "/admin-panel",
+        element: <ProtectedRoute />, // This is the route for admin
+        children: [
+          { path: "", element: <AdminPanel /> },
         ],
       },
       {

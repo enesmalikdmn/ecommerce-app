@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { Button, Stack, Icon } from "@chakra-ui/react";
+import { Button, Stack } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useBasket } from "../../contexts/BasketContext";
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  const { isLoginSucces, logout } = useAuth();
+  const { isLoginSucces, logout, user } = useAuth();
   const { basket } = useBasket();
   const navigate = useNavigate();  
 
@@ -46,6 +46,11 @@ function Navbar() {
                 Basket ({basket.length})
               </Button>
             </Link>
+            {user && user?.role === 'admin' && (
+              <Link to={`/admin-panel`}>
+                <Button colorScheme="blue">Admin Panel</Button>
+              </Link>
+            )}
             <Link to={`/profile`}>
               <Button colorScheme="blue">Profile</Button>
             </Link>

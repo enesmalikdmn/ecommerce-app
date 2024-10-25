@@ -9,8 +9,25 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isLoginSucces, setIsLoginSucces] = useState(false);
-
-
+    
+    const login = async (data) => {
+        setIsLoginSucces(true);
+        // setUser(data);
+        
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+    }
+    
+    const logout = (callback) => {
+        setIsLoginSucces(false);
+        setUser(null);
+        
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        
+        callback();
+    }
+    
     useEffect(() => {
         (async () => {
             const access_token = localStorage.getItem('access_token');
@@ -28,25 +45,6 @@ export const AuthProvider = ({ children }) => {
         })();
     }, []);
             
-
-    const login = async (data) => {
-        setIsLoginSucces(true);
-        setUser(data);
-
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
-    }
-
-    const logout = (callback) => {
-        setIsLoginSucces(false);
-        setUser(null);
-
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-
-        callback();
-    }
-
     const values = {
         user,
         login,
