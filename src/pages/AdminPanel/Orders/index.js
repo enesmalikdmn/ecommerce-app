@@ -19,8 +19,8 @@ function Orders({ orders }) {
           </Tr>
         </Thead>
         <Tbody>
-          {orders?.items?.map(order => (
-            <Tr key={order.id}>
+          {orders?.items?.map((order, index) => (
+            <Tr key={index}>
               <Td>{orders.userName}</Td>
               <Td>{order.id}</Td>
               <Td>{moment(order.updatedAt).format("DD/MM/YYYY")}</Td>
