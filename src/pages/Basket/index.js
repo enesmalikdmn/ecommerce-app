@@ -13,6 +13,7 @@ import CustomModal from "../../shared/CustomModal"; // Modal bileşenini dahil e
 function Basket() {
   const { basket, setBasket } = useBasket();
   const [address, setAddress] = useState("");
+  const [userName, setUserName] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const totalAmount = basket.reduce((acc, item) => acc + item.price, 0);
@@ -40,6 +41,7 @@ function Basket() {
 
   const handleOrder = () => {
     const order = {
+      userName,
       address,
       items: basket,
     };
@@ -79,6 +81,8 @@ function Basket() {
         onClose={onClose}
         address={address}
         setAddress={setAddress}
+        userName={userName}
+        setUserName={setUserName}
         handleOrder={handleOrder}
       />
     </div>

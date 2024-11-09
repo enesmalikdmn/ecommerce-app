@@ -10,9 +10,10 @@ import {
   FormControl,
   FormLabel,
   Textarea,
+  Input,
 } from "@chakra-ui/react";
 
-function CustomModal({ isOpen, onClose, address, setAddress, handleOrder }) {
+function CustomModal({ isOpen, onClose, address, setAddress, userName, setUserName, handleOrder }) {
   const initialRef = useRef();
 
   return (
@@ -21,8 +22,15 @@ function CustomModal({ isOpen, onClose, address, setAddress, handleOrder }) {
       <ModalContent>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl>
+          <FormControl className="flex flex-col gap-4">
             <FormLabel>Save Order</FormLabel>
+            <Input
+              ref={initialRef}
+              placeholder="Name"
+              resize={false}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
             <Textarea
               ref={initialRef}
               placeholder="Address"
