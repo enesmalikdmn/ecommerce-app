@@ -43,7 +43,7 @@ function Basket() {
       address,
       items: basket,
     };
-    localStorage.setItem("order", JSON.stringify(order));
+    localStorage.setItem("orders", JSON.stringify(order));
     setBasket([]);
     onClose();
   };
