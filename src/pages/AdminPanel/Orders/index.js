@@ -1,6 +1,5 @@
 import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Text } from '@chakra-ui/react'
-import moment from "moment";
 
 function Orders({ orders }) {
   const totalAmount = orders?.items?.reduce((acc, item) => acc + item.price, 0);
