@@ -33,7 +33,7 @@ function Products() {
   // Edit butonuna tıklandığında çalışacak fonksiyon
   const onEdit = (product) => {
     setSelectedProduct(product); // Düzenlenecek ürünü state'e atayın
-    onOpen(); // Modalı açın
+    onOpen();
   };
 
   // Düzenleme işlemini gerçekleştiren fonksiyon
@@ -47,8 +47,6 @@ function Products() {
     <div>
       <Text fontSize="xl" mb="4">Products</Text>
       <Table dataSource={data} columns={columns} />
-
-      {/* Düzenleme Modalı */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
