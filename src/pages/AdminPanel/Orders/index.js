@@ -14,7 +14,6 @@ function Orders({ orders }) {
           <Tr>
             <Th>User Name</Th>
             <Th>Order ID</Th>
-            <Th>Order Date</Th>
             <Th>Order Price</Th>
           </Tr>
         </Thead>
@@ -23,7 +22,6 @@ function Orders({ orders }) {
             <Tr key={index}>
               <Td>{orders.userName}</Td>
               <Td>{order.id}</Td>
-              <Td>{moment(order.updatedAt).format("DD/MM/YYYY")}</Td>
               <Td>${order.price}</Td>
             </Tr>
           ))}
