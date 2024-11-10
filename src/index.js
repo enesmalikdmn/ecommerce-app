@@ -25,6 +25,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import Profile from './pages/Profile';
 import Basket from './pages/Basket';
 import NotFound from './pages/NotFound';
+import Home from './pages/AdminPanel/Home';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: <Home />,
       },
       {
         path: "/products",
