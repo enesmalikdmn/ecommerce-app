@@ -1,7 +1,7 @@
 import { Space, Button, Popconfirm } from "antd";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function (onDelete) {
+export default function (onDelete, onEdit) {
   return [
     {
       title: "ID",
@@ -24,16 +24,11 @@ export default function (onDelete) {
       key: "description",
     },
     {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-    },
-    {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary">Edit</Button>
+          <Button type="primary" onClick={() => onEdit(record)}>Edit</Button>
           <Button type="primary" danger>
             <Popconfirm
               title="Are you sure to delete this product?"

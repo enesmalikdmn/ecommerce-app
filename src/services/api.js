@@ -24,6 +24,11 @@ export const deleteProduct = async (id) => {
     return data
 }
 
+export const updateProduct = async (product) => {
+    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/products/${product.id}`, product)
+    return data
+}
+
 export const getProductDetail = async (id) => {
     const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`)
     return data
