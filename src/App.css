@@ -3,3 +3,11 @@
     height: calc(100vh - 80px);
     overflow: scroll;
 }
+
+@media (max-width: 768px) {
+    #content {
+        padding: 0.5rem 0.5rem;
+        height: calc(100vh - 80px);
+        overflow: scroll;
+    }
+}

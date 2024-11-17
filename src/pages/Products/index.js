@@ -20,14 +20,13 @@ function Products() {
     },
   });
 
-  // Son öğeye referans vermek için Intersection Observer kullanıyoruz
   const observerRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage(); // Son öğe ekranda görünürse yeni sayfayı getir
+          fetchNextPage();
         }
       },
       { threshold: 1 }
@@ -35,7 +34,7 @@ function Products() {
 
     if (observerRef.current) observer.observe(observerRef.current);
 
-    return () => observer.disconnect(); // Temizlik işlemi
+    return () => observer.disconnect();
   }, [hasNextPage, fetchNextPage]);
 
   if (status === 'loading') return <Spinner size="xl" />;
@@ -44,7 +43,10 @@ function Products() {
 
   return (
     <div>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid
+        templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+        gap={6}
+      >
         {data.pages.map((page, index) => (
           <React.Fragment key={index}>
             {page.map((item) => (
