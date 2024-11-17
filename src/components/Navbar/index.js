@@ -38,33 +38,33 @@ function Navbar() {
               <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerBody>
-                  <Stack spacing={4}>
+                  <Stack spacing={4} mt={10}>
                     {!isMobile && (
                       <Link to={`/products`} onClick={onClose}>Products</Link>
                     )}
                     {!isLoginSucces ? (
                       <>
                         <Link to={`/signup`} onClick={onClose}>
-                          <Button colorScheme="blue">Register</Button>
+                          <Button colorScheme="blue" w={"full"}>Register</Button>
                         </Link>
                         <Link to={`/signin`} onClick={onClose}>
-                          <Button colorScheme="blue">Login</Button>
+                          <Button colorScheme="blue" w={"full"}>Login</Button>
                         </Link>
                       </>
                     ) : (
                       <>
                         <Link to={`/basket`} onClick={onClose}>
-                          <Button colorScheme="blue">
+                          <Button colorScheme="blue" w={"full"}>
                             Basket ({basket.length})
                           </Button>
                         </Link>
                         {user && user?.role === 'admin' && (
                           <Link to={`/admin-panel`} onClick={onClose}>
-                            <Button colorScheme="blue">Admin Panel</Button>
+                            <Button colorScheme="blue" w={"full"}>Admin Panel</Button>
                           </Link>
                         )}
                         <Link to={`/profile`} onClick={onClose}>
-                          <Button colorScheme="blue">Profile</Button>
+                          <Button colorScheme="blue" w={"full"}>Profile</Button>
                         </Link>
                         <Button onClick={() => { handleLogout(); onClose(); }} colorScheme="blue" variant="outline">
                           Logout
